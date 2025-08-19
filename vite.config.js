@@ -11,5 +11,5 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/artiste-vitrine/',
+  base: '/Showcase/',
 });
