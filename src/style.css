@@ -1,0 +1,179 @@
+/*
+ * Styles globaux de l'application.
+ * 
+ * Nous utilisons des variables CSS pour définir une palette de couleurs
+ * cohérente à travers le site. N'hésitez pas à ajuster ces valeurs pour
+ * personnaliser l'apparence selon l'univers de l'artiste.
+ */
+
+:root {
+  --color-primary: #1f2937; /* bleu nuit pour le header */
+  --color-secondary: #f5f5f5; /* gris clair pour le fond */
+  --color-accent: #e11d48; /* rouge framboise pour les boutons */
+  --color-text: #1f2937; /* couleur principale du texte */
+  --color-card-bg: #ffffff; /* fond des cartes */
+  --color-border: #e5e7eb; /* couleur des bordures */
+  --border-radius: 8px;
+  --transition-duration: 0.2s;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+/* En-tête et navigation */
+header {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+nav a {
+  margin-right: 1.5rem;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity var(--transition-duration) ease;
+}
+
+nav a:last-of-type {
+  margin-right: 0;
+}
+
+nav a:hover {
+  opacity: 0.8;
+}
+
+nav a.active {
+  text-decoration: underline;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Section des œuvres */
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.artwork-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+}
+
+.artwork-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.artwork-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #e5e5e5;
+}
+
+.artwork-content {
+  padding: 1rem;
+}
+
+.artwork-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.artwork-description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Formulaire d'ajout */
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color var(--transition-duration);
+}
+
+button:hover {
+  background-color: #be123c;
+}
+
+/* Liens externes */
+.external-links {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.external-links a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+.external-links a:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
