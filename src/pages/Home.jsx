@@ -14,12 +14,11 @@ function Carousel({ items, renderItem, title }) {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 3, // Affiche 3 cartes à la fois
+    slidesToScroll: 1, // Fait défiler une carte à la fois
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: true,
-    fade: true,
     cssEase: 'linear'
   };
 
@@ -111,7 +110,7 @@ export default function Home() {
             items={exhibitions}
             title="Mes prochaines expos"
             renderItem={(expo) => (
-              <div style={{ textAlign: 'center' }}>
+              <div className="expo-content">
                 {expo.image_url && (
                   <img 
                     src={expo.image_url} 
@@ -120,8 +119,9 @@ export default function Home() {
                   />
                 )}
                 <h4>{expo.title}</h4>
-                <p>{expo.description}</p>
-                <p>{new Date(expo.start_date).toLocaleDateString()}</p>
+                <p>{`Du ${new Date(expo.start_date).toLocaleDateString()} au ${new Date(expo.end_date).toLocaleDateString()}`}</p>
+                <p>{expo.location}</p>
+                <p className="expo-description">{expo.description}</p>
               </div>
             )}
           />
@@ -210,16 +210,30 @@ export default function Home() {
         .slick-prev,
         .slick-next {
           z-index: 1;
-          width: 40px;
-          height: 40px;
+          width: 30px;
+          height: 30px;
+          color: #ffffff; /* Change la couleur par défaut */
+          background-color: #e13b57; /* Ajoute une couleur de fond */
+          border-radius: 50%; /* Rend les flèches circulaires */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+          transition: all 0.3s ease;
+        }
+
+        .slick-prev:hover,
+        .slick-next:hover {
+          background-color: #c4314d; /* Change la couleur au survol */
+          transform: scale(1.1); /* Agrandit légèrement au survol */
         }
 
         .slick-prev {
-          left: -50px;
+          left: -10px; /* Ajuste la position */
         }
 
         .slick-next {
-          right: -50px;
+          right: -10px; /* Ajuste la position */
         }
 
         .slick-dots {
@@ -232,6 +246,75 @@ export default function Home() {
 
         .slick-dots li.slick-active button:before {
           color: #c4314d;
+        }
+
+        .artwork-content {
+          height: 120px; /* Hauteur fixe pour uniformiser les cartes */
+          padding: 1rem;
+          background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+          border-radius: 8px; /* Coins arrondis */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .artwork-content h4 {
+          font-size: 1.2rem;
+          margin: 0.5rem 0;
+        }
+
+        .artwork-content p {
+          font-size: 1rem;
+          margin: 0.5rem 0;
+          overflow: hidden; /* Cache le texte débordant */
+          text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+          display: -webkit-box;
+          -webkit-line-clamp: 4; /* Limite à 4 lignes */
+          -webkit-box-orient: vertical;
+        }
+
+        /* Style pour les cartes des expositions */
+        .expo-content {
+          width: 300px; /* Largeur fixe pour uniformiser les cartes */
+          height: 240px; /* Réduction de la hauteur totale */
+          padding: 0.8rem; /* Réduction du padding */
+          background: rgba(255, 255, 255, 0.8); /* Fond blanc semi-transparent */
+          border-radius: 8px; /* Coins arrondis */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          text-align: center;
+          overflow: hidden; /* Empêche le contenu de dépasser */
+        }
+
+        .expo-content h4 {
+          font-size: 1.2rem;
+          margin: 0.3rem 0; /* Réduction de l'écart vertical */
+          white-space: nowrap; /* Empêche le titre de passer à la ligne */
+          overflow: hidden; /* Cache le texte débordant */
+          text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+        }
+
+        .expo-content p {
+          font-size: 1rem;
+          margin: 0.3rem 0; /* Réduction de l'écart vertical */
+          overflow: hidden; /* Cache le texte débordant */
+          text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+          display: -webkit-box;
+          -webkit-line-clamp: 1; /* Limite à 1 ligne pour les dates et le lieu */
+          -webkit-box-orient: vertical;
+        }
+
+        .expo-description {
+          font-size: 0.9rem; /* Ajustement de la taille du texte */
+          margin-top: 0.5rem; /* Réduction de l'écart avec les autres éléments */
+          overflow: hidden; /* Cache le texte débordant */
+          text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+          display: -webkit-box;
+          -webkit-line-clamp: 4; /* Augmentation à 4 lignes pour la description */
+          -webkit-box-orient: vertical;
         }
       `}</style>
     </div>
