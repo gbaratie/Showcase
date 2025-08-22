@@ -330,21 +330,17 @@ function AboutSection() {
 }
 
 function ArtworksSection() {
-  const { artworks, addArtwork, deleteArtwork } = useArtworks();
+  const { addArtwork } = useArtworks();
+  const [artworks, setArtworks] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file || null);
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     if (!title.trim()) return;
-    
+
     setIsLoading(true);
     try {
       await addArtwork({
@@ -365,21 +361,26 @@ function ArtworksSection() {
     }
   }
 
-  async function handleDelete(id) {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette œuvre ?')) {
-      return;
-    }
+  useEffect(() => {
+    fetchArtworks();
+  }, []);
 
-    setIsLoading(true);
+  async function fetchArtworks() {
     try {
-      await deleteArtwork(id);
-      alert('Œuvre supprimée avec succès !');
+      const { data, error } = await supabase
+        .from('artworks')
+        .select('*');
+
+      if (error) throw error;
+      setArtworks(data || []);
     } catch (error) {
       console.error('Erreur:', error.message);
-      alert('Erreur lors de la suppression');
-    } finally {
-      setIsLoading(false);
     }
+  }
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file || null);
   }
 
   async function handleDelete(id) {
@@ -645,13 +646,14 @@ function ExhibitionsSection() {
 
     try {
       setIsLoading(true);
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('exhibitions')
         .delete()
         .match({ id });
 
       if (error) throw error;
-      
+
+      console.log('Données supprimées:', data); // Ajoutez ceci pour vérifier la réponse
       setExhibitions(exhibitions.filter(exhibition => exhibition.id !== id));
       alert('Exposition supprimée avec succès !');
     } catch (error) {
