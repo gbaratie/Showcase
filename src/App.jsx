@@ -6,6 +6,7 @@ import AddArtwork from './pages/AddArtwork';
 import About from './pages/About';
 import Modifier from './pages/Modifier';
 import { ArtworkProvider } from './context/ArtworkContext';
+import './styles/variables.css';
 
 /**
  * Composant racine de l'application. Il définit les routes et englobe

@@ -1,0 +1,44 @@
+:root {
+  --primary-color: #21293a;
+  --secondary-color: #2a3547;
+  --accent-color: #e13b57;
+  --accent-hover: #c4314d;
+  --text-light: #ffffff;
+  --text-dark: #1f2937;
+  --border-radius: 8px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.button {
+  padding: var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius);
+  background: var(--accent-color);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: var(--accent-hover);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.input-field {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  margin-top: var(--spacing-sm);
+}
