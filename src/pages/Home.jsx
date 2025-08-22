@@ -284,7 +284,7 @@ export default function Home() {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre */
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: space-between ;
           text-align: center;
           overflow: hidden; /* Empêche le contenu de dépasser */
         }
@@ -303,16 +303,17 @@ export default function Home() {
           overflow: hidden; /* Cache le texte débordant */
           text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
           display: -webkit-box;
-          -webkit-line-clamp: 1; /* Limite à 1 ligne pour les dates et le lieu */
+          -webkit-line-clamp: 2; /* Limite à 1 ligne pour les dates et le lieu */
           -webkit-box-orient: vertical;
         }
 
         .expo-description {
-          font-size: 0.9rem; /* Ajustement de la taille du texte */
+        height: 100px;  
+        font-size: 0.9rem; /* Ajustement de la taille du texte */
           margin-top: 0.5rem; /* Réduction de l'écart avec les autres éléments */
           overflow: hidden; /* Cache le texte débordant */
-          text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
           display: -webkit-box;
+          text-align: center;
           -webkit-line-clamp: 4; /* Augmentation à 4 lignes pour la description */
           -webkit-box-orient: vertical;
         }
