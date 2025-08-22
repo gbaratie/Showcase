@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AddArtwork from './pages/AddArtwork';
 import About from './pages/About';
+import Modifier from './pages/Modifier';
 import { ArtworkProvider } from './context/ArtworkContext';
 
 /**
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/ajouter" element={<AddArtwork />} />
         <Route path="/a-propos" element={<About />} />
+        <Route path="/modifier" element={<Modifier />} />
         {/* Catch-all pour toute route inconnue */}
         <Route
           path="*"

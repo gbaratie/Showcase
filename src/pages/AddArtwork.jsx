@@ -14,33 +14,29 @@ export default function AddArtwork() {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [imageData, setImageData] = useState('');
+  const [imageFile, setImageFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Gère le changement de fichier image et convertit le fichier en DataURL
+  // Gère le changement de fichier image
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    if (!file) {
-      setImageData('');
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setImageData(e.target.result);
-    };
-    reader.readAsDataURL(file);
+    setImageFile(file || null);
   };
 
-  // Soumission du formulaire : ajoute l'œuvre et revient sur la page d'accueil
-  const handleSubmit = (event) => {
+  // Soumission du formulaire : upload image + ajout œuvre
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!title.trim()) {
-      return;
-    }
-    addArtwork({ title: title.trim(), description: description.trim(), image: imageData });
-    // Réinitialise le formulaire
+    if (!title.trim()) return;
+    setLoading(true);
+    await addArtwork({
+      title: title.trim(),
+      description: description.trim(),
+      image: imageFile,
+    });
     setTitle('');
     setDescription('');
-    setImageData('');
+    setImageFile(null);
+    setLoading(false);
     navigate('/');
   };
 
@@ -76,7 +72,9 @@ export default function AddArtwork() {
             onChange={handleImageChange}
           />
         </div>
-        <button type="submit">Ajouter l'œuvre</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Ajout en cours..." : "Ajouter l'œuvre"}
+        </button>
       </form>
     </div>
   );
